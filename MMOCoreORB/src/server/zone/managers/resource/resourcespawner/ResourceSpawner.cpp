@@ -618,7 +618,11 @@ int ResourceSpawner::randomizeValue(int min, int max) {
 			}
 		}
 	}
-
+	
+	if (randomStat < (max - min) / 2) {
+		randomStat = (max - min) / 2;
+	}
+	
 	return randomStat;
 }
 

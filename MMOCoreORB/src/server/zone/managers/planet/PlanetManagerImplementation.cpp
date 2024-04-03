@@ -616,16 +616,16 @@ bool PlanetManagerImplementation::isTravelToLocationPermitted(const String& depa
 		return false;
 
 	//Check to see if incoming Travel is allowed
-	if (!arrivalPlanetManager->isIncomingTravelAllowed(arrivalPoint))
-		return false;
+//	if (!arrivalPlanetManager->isIncomingTravelAllowed(arrivalPoint))
+//		return false;
 
 	//If both zones are the same, then intraplanetary travel is allowed.
 	if (arrivalZone == zone)
 		return true;
 
 	//Check to see if interplanetary travel is allowed between both points.
-	if (!isInterplanetaryTravelAllowed(departurePoint) || !arrivalPlanetManager->isInterplanetaryTravelAllowed(arrivalPoint))
-		return false;
+//	if (!isInterplanetaryTravelAllowed(departurePoint) || !arrivalPlanetManager->isInterplanetaryTravelAllowed(arrivalPoint))
+//		return false;
 
 	return true;
 }
@@ -856,10 +856,10 @@ void PlanetManagerImplementation::loadClientRegions(LuaObject* outposts) {
 
 		Locker shapeLocker(areaShape);
 
-		areaShape->setRadius(radius * 2);
+		areaShape->setRadius(radius * 1);//setting radius to 1x allows building after "has left city"
 		areaShape->setAreaCenter(x, y);
 		noBuild->setAreaShape(areaShape);
-		noBuild->setRadius(radius * 2);
+		noBuild->setRadius(radius * 1);
 		noBuild->setNoBuildArea(true);
 		// Cities already have "Municipal" protection so the structure no-build should not apply to camps
 		noBuild->setCampingPermitted(true);
@@ -879,29 +879,29 @@ bool PlanetManagerImplementation::validateClientCityInRange(CreatureObject* crea
 
 	Locker locker(_this.getReferenceUnsafeStaticCast());
 
-	for (int i = 0; i < regionMap.getTotalRegions(); ++i) {
-		CityRegion* region = regionMap.getRegion(i);
-
-		for (int j = 0; j < region->getRegionsCount(); ++j) {
-			Region* activeRegion = region->getRegion(j);
-			float radius = activeRegion->getRadius();
-
-			if (radius < 512)
-				radius = 512;
-
-			float range = radius * 2;
-
-			Vector3 position(activeRegion->getPositionX(), activeRegion->getPositionY(), 0);
-
-			if (position.squaredDistanceTo(testPosition) <= range * range) {
-				StringIdChatParameter msg("player_structure", "city_too_close");
-				msg.setTO(region->getRegionName());
-
-				creature->sendSystemMessage(msg);
-				return false;
-			}
-		}
-	}
+//	for (int i = 0; i < regionMap.getTotalRegions(); ++i) {
+//		CityRegion* region = regionMap.getRegion(i);
+//
+//		for (int j = 0; j < region->getRegionsCount(); ++j) {
+//			Region* activeRegion = region->getRegion(j);
+//			float radius = activeRegion->getRadius();
+//
+//			if (radius < 512)//this is setting no build zone 512m outside of the "has left coronet" municipal zone
+//				radius = 512;
+//
+//			float range = radius * 2;
+//
+//			Vector3 position(activeRegion->getPositionX(), activeRegion->getPositionY(), 0);
+//
+//			if (position.squaredDistanceTo(testPosition) <= range * range) {
+//				StringIdChatParameter msg("player_structure", "city_too_close");
+//				msg.setTO(region->getRegionName());
+//
+//				creature->sendSystemMessage(msg);
+//				return false;
+//			}
+//		}
+//	}
 
 	return true;
 }

@@ -1513,6 +1513,14 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack())
 		damage *= 0.25;
 
+	//PvE dmg
+	if (attacker->isPlayerCreature() && !defender->isPlayerCreature())
+		damage *= 1.5;
+
+	//EvP dmg
+	if (!attacker->isPlayerCreature() && defender->isPlayerCreature())
+		damage *= 0.5;
+
 	if (damage < 1) damage = 1;
 
 	debug() << "damage to be dealt is " << damage;

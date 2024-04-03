@@ -43,7 +43,7 @@ Vector3 SpawnAreaImplementation::getRandomPosition(SceneObject* player) {
 	const auto worldPosition = player->getWorldPosition();
 
 	while (!positionFound && retries-- > 0) {
-		position = areaShape->getRandomPosition(worldPosition, 64.0f, 256.0f);
+		position = areaShape->getRandomPosition(worldPosition, 96.0f, 256.0f);
 
 		positionFound = true;
 

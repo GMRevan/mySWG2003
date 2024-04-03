@@ -157,7 +157,9 @@ void WearableObjectImplementation::applyAttachment(CreatureObject* player,
 		Locker locker(player);
 
 		if (isEquipped()) {
-			removeSkillModsFrom(player);
+			player->sendSystemMessage("*** You can not add a Skill Enhancing Attachment to an item while it is equipped ***");
+			return;
+			//removeSkillModsFrom(player);
 		}
 
 		if (wearableSkillMods.size() < 6) {

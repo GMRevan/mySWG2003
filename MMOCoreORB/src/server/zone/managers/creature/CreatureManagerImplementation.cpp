@@ -108,7 +108,7 @@ SceneObject* CreatureManagerImplementation::spawnLair(unsigned int lairTemplate,
  	building->setFaction(lairTmpl->getFaction());
  	building->setPvpStatusBitmask(CreatureFlag::ATTACKABLE);
  	building->setOptionsBitmask(0, false);
- 	building->setMaxCondition(difficultyLevel * (900 + System::random(200)));
+ 	building->setMaxCondition(difficultyLevel * (900 + System::random(200)) / 2);
  	building->setConditionDamage(0, false);
  	building->initializePosition(x, z, y);
  	building->setDespawnOnNoPlayersInRange(true);
@@ -604,6 +604,12 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 			} else {
 				trx.abort() << "createLoot failed for ai object.";
 			}
+			
+			if (lootManager->createLoot(trx, creatureInventory, destructedObject)) {
+				trx.commit(true);
+			} else {
+				trx.abort() << "createLoot failed for ai object.";
+			}
 		}
 
 		Reference<AiAgent*> strongReferenceDestructedObject = destructedObject;
@@ -808,7 +814,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	if (!creature->canHarvestMe(player))
 		return;
 
-	if (!player->isInRange(creature, 7))
+	if (!player->isInRange(creature, 32))
 		return;
 
 	ManagedReference<ResourceManager*> resourceManager = zone->getZoneServer()->getResourceManager();
@@ -897,7 +903,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 		quantityExtracted = 1;
 
 	TransactionLog trx(TrxCode::HARVESTED, player, resourceSpawn);
-	resourceManager->harvestResourceToPlayer(trx, player, resourceSpawn, quantityExtracted);
+	resourceManager->harvestResourceToPlayer(trx, player, resourceSpawn, quantityExtracted * 2);
 	trx.commit();
 
 	/// Send System Messages

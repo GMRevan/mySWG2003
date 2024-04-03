@@ -1,10 +1,11 @@
 JediManager = require("managers.jedi.jedi_manager")
 local ObjectManager = require("managers.object.object_manager")
+local PlayerManager = require("managers.player_manager")
 
 jediManagerName = "HologrindJediManager"
 
-NUMBEROFPROFESSIONSTOMASTER = 6
-MAXIMUMNUMBEROFPROFESSIONSTOSHOWWITHHOLOCRON = NUMBEROFPROFESSIONSTOMASTER - 2
+NUMBEROFPROFESSIONSTOMASTER = 3 --this is now how many profs are selected
+MAXIMUMNUMBEROFPROFESSIONSTOSHOWWITHHOLOCRON = 3
 
 HologrindJediManager = JediManager:new {
 	screenplayName = jediManagerName,
@@ -26,7 +27,7 @@ function HologrindJediManager:getGrindableProfessionList()
 		{ "crafting_architect_master", 		CRAFTING_ARCHITECT_MASTER  },
 		{ "crafting_armorsmith_master", 	CRAFTING_ARMORSMITH_MASTER  },
 		{ "crafting_artisan_master", 		CRAFTING_ARTISAN_MASTER  },
-		{ "outdoors_bio_engineer_master", 	OUTDOORS_BIOENGINEER_MASTER  },
+		{ "outdoors_bio_engineer_master", 	OUTDOORS_BIO_ENGINEER_MASTER  },
 		{ "combat_bountyhunter_master", 	COMBAT_BOUNTYHUNTER_MASTER  },
 		{ "combat_brawler_master", 		COMBAT_BRAWLER_MASTER  },
 		{ "combat_carbine_master", 		COMBAT_CARBINE_MASTER  },
@@ -42,7 +43,7 @@ function HologrindJediManager:getGrindableProfessionList()
 		{ "social_imagedesigner_master", 	SOCIAL_IMAGEDESIGNER_MASTER  },
 		{ "combat_marksman_master", 		COMBAT_MARKSMAN_MASTER  },
 		{ "science_medic_master", 		SCIENCE_MEDIC_MASTER  },
-		{ "crafting_merchant_master", 		CRAFTING_MERCHANT_MASTER  },
+		--{ "crafting_merchant_master", 		CRAFTING_MERCHANT_MASTER  },
 		{ "social_musician_master", 		SOCIAL_MUSICIAN_MASTER  },
 		{ "combat_polearm_master", 		COMBAT_POLEARM_MASTER  },
 		{ "combat_pistol_master", 		COMBAT_PISTOL_MASTER  },
@@ -182,6 +183,22 @@ function HologrindJediManager:onPlayerLoggedIn(pCreatureObject)
 
 	self:checkIfProgressedToJedi(pCreatureObject)
 	self:registerObservers(pCreatureObject)
+	
+		if JediTrials:isOnKnightTrials(pCreatureObject) then	
+		--KnightTrials:showCurrentTrial(pCreatureObject) --DOES NOT FIX
+		
+		--KnightTrials:startNextKnightTrial(pCreatureObject)--this FIXES KNIGHT TRIAL!!!! well sort of its a workaround that resets current trial every logout or server rest.
+
+		--100% fix for knight trial progress
+			local trialNumber = JediTrials:getCurrentTrial(pCreatureObject)
+			local trialData = knightTrialQuests[trialNumber]
+
+			if (trialData.trialType == TRIAL_HUNT or trialData.trialType == TRIAL_HUNT_FACTION) then
+				createObserver(KILLEDCREATURE, "KnightTrials", "notifyKilledHuntTarget", pCreatureObject)
+			end
+		
+	end
+	
 end
 
 -- Get the profession name from the badge number.
@@ -216,6 +233,8 @@ function HologrindJediManager:sendHolocronMessage(pCreatureObject)
 			if not PlayerObject(pGhost):hasBadge(professions[i]) then
 				local professionText = self:getProfessionStringIdFromBadgeNumber(professions[i])
 				CreatureObject(pCreatureObject):sendSystemMessageWithTO("@jedi_spam:holocron_light_information", "@skl_n:" .. professionText)
+				--CreatureObject(pCreatureObject):playEffect("clienteffect/trap_electric_01.cef", "")
+				break
 			end
 		end
 

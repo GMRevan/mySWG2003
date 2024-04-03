@@ -2108,24 +2108,24 @@ void CreatureObjectImplementation::notifyLoadFromDatabase() {
 
 	const SkillList* playerSkillList = getSkillList();
 
-	int totalSkillPointsWasted = 250;
-
-	for (int i = 0; i < playerSkillList->size(); ++i) {
-		Skill* skill = playerSkillList->get(i);
-
-		if (skill == nullptr)
-			continue;
-
-		skillManager->awardDraftSchematics(skill, ghost, false);
-
-		totalSkillPointsWasted -= skill->getSkillPointsRequired();
-	}
-
-	if (ghost->getSkillPoints() != totalSkillPointsWasted) {
-		error() << "skill points on load mismatch calculated: " << totalSkillPointsWasted
-		       << " found: " << ghost->getSkillPoints();
-		ghost->setSkillPoints(totalSkillPointsWasted);
-	}
+//	int totalSkillPointsWasted = 250;
+//
+//	for (int i = 0; i < playerSkillList->size(); ++i) {
+//		Skill* skill = playerSkillList->get(i);
+//
+//		if (skill == nullptr)
+//			continue;
+//
+//		skillManager->awardDraftSchematics(skill, ghost, false);
+//
+//		totalSkillPointsWasted -= skill->getSkillPointsRequired();
+//	}
+//
+//	if (ghost->getSkillPoints() != totalSkillPointsWasted) {
+//		error() << "skill points on load mismatch calculated: " << totalSkillPointsWasted
+//		       << " found: " << ghost->getSkillPoints();
+//		ghost->setSkillPoints(totalSkillPointsWasted);
+//	}
 
 	ghost->getSchematics()->addRewardedSchematics(ghost);
 
