@@ -620,8 +620,11 @@ int ResourceSpawner::randomizeValue(int min, int max) {
 	}
 	
 	if (randomStat < (max - min) / 2) {
-		randomStat = (max - min) / 2;
+		randomStat = System::random(max / 4) + ((max - min) / 2);
 	}
+	
+	if (randomStat > max)
+		randomStat = max;
 	
 	return randomStat;
 }
