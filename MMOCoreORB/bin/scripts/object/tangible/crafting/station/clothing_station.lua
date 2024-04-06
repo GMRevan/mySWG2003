@@ -70,7 +70,8 @@ object_tangible_crafting_station_clothing_station = object_tangible_crafting_sta
 	customizationDefaults = {},
 
 	stationType = 1,
-	complexityLevel = 100,
+  complexityLevel = 100,
+  usemodifier = 25,
 
 	numberExperimentalProperties = {1, 1, 1, 1},
 	experimentalProperties = {"XX", "XX", "XX", "CD"},

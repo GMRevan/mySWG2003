@@ -11,15 +11,15 @@ myswg_vendor_first_screen = ConvoScreen:new {
     stopConversation = "false",
     options = { 
         {"DOC/ENT BUFFS", "newbuff1"},
-        {"Weapons", "weaps1"},
-        {"Armor", "armor1"},
-        {"Loot", "loot1"},
+       --{"Weapons", "weaps1"},
+        --{"Armor", "armor1"},
+        --{"Loot", "loot1"},
         {"Artisan", "art1"},
         {"Architect", "arch1"},
-        {"Chef", "chef1"},        
+        --{"Chef", "chef1"},        
         {"Medic", "doc1"},
-        {"Droids", "droid1"},
-         {"Tailor", "tailor1"},
+        --{"Droids", "droid1"},
+         --{"Tailor", "tailor1"},
                 
 			--	{"No thank you.", "deny_quest"},--not needed
     }
@@ -90,11 +90,11 @@ art1 = ConvoScreen:new {
         {"Chemical survey tool - 500", "option25"},
         {"Generic Crafting Tool - 1k", "option26"},
         {"Backpack - 5k", "option27"},
-        {"Speederbike - 10k", "option28"},
-        {"Weapon Repair Tool - 10k", "option66"},
-        {"Armor Repair Tool - 10k", "option67"},
+        --{"Weapon Repair Tool - 10k", "option66"},
+        --{"Armor Repair Tool - 10k", "option67"},
         {"Weapon Upgrade Kit - 10k", "option68"},
-        {"Armor Upgrade Kit - 10k", "option69"},       
+        {"Armor Upgrade Kit - 10k", "option69"},  
+        {"Speederbike (regular, not swoop) - 15k", "option28"},     
         
 --        {"Medium Mineral Harvester Deed - 50k", "option29"},
 --        {"Medium Flora Harvester Deed - 50k", "option30"},
@@ -112,12 +112,12 @@ arch1 = ConvoScreen:new {
     customDialogText = "I sell structures! See anything you like?",
     stopConversation = "false",
     options = { 
-        {"45 effectiveness Weapon/Item Crafting Station - 50k", "option74"},
-        {"45 effectiveness Structure Crafting Station - 50k", "option75"},
-      	{"45 effectiveness Clothing Crafting Station - 50k", "option72"},
-        {"45 effectiveness Food Crafting Station - 50k", "option73"},
-      	{"Small Generic House - 50k", "option34"},
-        {"Medium Generic House - 100k", "option35"},
+        {"25 effectiveness Weapon/Item Crafting Station - 50k", "option74"},
+        {"25 effectiveness Structure Crafting Station - 50k", "option75"},
+      	{"25 effectiveness Clothing Crafting Station - 50k", "option72"},
+        {"25 effectiveness Food Crafting Station - 50k", "option73"},
+      	{"Small Generic House - 100k", "option34"},
+--        {"Medium Generic House - 100k", "option35"},
         {"Clothing Factory Deed - 100k", "option36"},
         {"Food Factory Deed - 100k", "option37"},
         {"item Factory Deed - 100k", "option38"},
@@ -150,7 +150,7 @@ loot1 = ConvoScreen:new {
     customDialogText = "Would you like to buy some loot drops?",
     stopConversation = "false",
     options = { 
-        {"10k stack Resource Deed - 200k", "option46"},
+        --{"10k stack Resource Deed - 200k", "option46"},
 --        {"Random lvl 50 Pistol Loot - 15k", "option56"},
 --        {"Random lvl 50 Carbine Loot - 15k", "option57"},
 --        {"Random lvl 50 Rifle Loot - 15k", "option58"},
@@ -227,18 +227,13 @@ newbuff1 = ConvoScreen:new {
     stopConversation = "false",
     options = { 
 
-        {"100% Doctor Buffs 4hr - 10k", "buff1"},
-        {"200% Doctor Buffs 5hr - 20k", "buff2"},
-        {"300% Doctor Buffs 6hr - 30k", "buff3"},
-        {"200% Entertainer Buffs 4hr - 10k", "buff4"},
-        {"300% Entertainer Buffs 6hr - 20k", "buff5"},
+        {"1900 medical/1000 ent buffs 3hr - 15k", "buff1"},
+--        {"200% Doctor Buffs 5hr - 20k", "buff2"},
+--        {"300% Doctor Buffs 6hr - 30k", "buff3"},
+--        {"200% Entertainer Buffs 4hr - 10k", "buff4"},
+--        {"300% Entertainer Buffs 6hr - 20k", "buff5"},
  
---        {"125%/3hr Mind Buffs - 5k", "buff5"},
---        {"StimPack A - 500", "option50"},
---        {"StimPack B - 1k", "option51"},
---        {"StimPack C - 2k", "option52"},
---        {"StimPack D - 5k", "option53"},
---        {"StimPack E - 10k", "option54"},
+
       	{"Main menu.", "first_screen"},
     }
 }

@@ -671,3 +671,8 @@ includeFile("events/ServerEventAutomation.lua")
 
 -- Custom content - Loads last to allow for overrides
 includeFile("../custom_scripts/screenplays/screenplays.lua")
+
+--myswg screenplays
+includeFile("tasks/naboo/myswg_vendor.lua")
+
+
